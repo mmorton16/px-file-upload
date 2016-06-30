@@ -1,0 +1,30 @@
+{
+  "name": "px-file-upload",
+  "version": "0.0.1",
+  "main": [
+    "px-file-upload.html"
+  ],
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "Gruntfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+    "polymer": "~1.4.0",
+    "px-theme": "~0.7.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.1.6",
+    "px-meta-buttons-design": "~0.5.5",
+    "px-forms-design": "~0.3.16",
+    "px-starter-kit-design": "~0.5.5",
+    "px-tables-design": "~0.3.8"
+  },
+  "resolutions": {
+    "polymer": "^1.5.0"
+  }
+}

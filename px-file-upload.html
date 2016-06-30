@@ -1,0 +1,200 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+
+<!--
+Element providing solution to no problem in particular. As a simple example, increments a counter when clicked.
+
+##### Usage
+
+    <px-file-upload></px-file-upload>
+
+@element px-file-upload
+@blurb Element providing solution to no problem in particular.
+@homepage index.html
+@demo demo.html
+-->
+<dom-module id="px-file-upload">
+  <link rel="import" type="css" href="css/px-file-upload.css"/>
+  <template>
+    <div id="dropZone" class="fieldset">
+      <span hidden$="{{!_isAdvancedUpload}}">Drag and drop files here, or click the button below.</span><br/>
+      <template is="dom-if" if="{{multiple}}">
+        <table class="table table--small table--rows" id="fileTable">
+          <tr id="headerRow" hidden>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Type</th>
+            <th></th>
+          </tr>
+          <template is="dom-repeat" items="{{files}}">
+            <tr>
+              <td>{{item.name}}</td>
+              <td>{{_readableFileSize(item.size)}}</td>
+              <td>{{item.type}}</td>
+              <td><i id="{{index}}" class="fa fa-minus-circle" on-click="_removeFile"/></td>
+            </tr>
+          </template>
+        </table>
+      </template>
+      <label class="btn btn--small btn--secondary">Choose File
+        <input id="fileInput" type="file" on-change="_fileChange" multiple={{multiple}} hidden></input>
+      </label>
+      <template is="dom-if" if="{{!multiple}}">
+        <input id="fileList" class$="text-input input--{{size}}" type="text" placeholder="No file selected" disabled></input>
+      </template>
+
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-file-upload',
+
+    properties: {
+      /**
+       * Indicates whether multiple files are allowed (true) or only a single file (false)
+       * @property multiple
+       * @type Boolean
+       * @default false
+       */
+      multiple: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Allows the developer to specify which size to use for the input text box
+       * @property size
+       * @type String
+       * @default small
+       */
+      size: {
+        type: String,
+        value: 'small'
+      },
+      /**
+       * FileList object which stores information regarding the files to upload
+       * @property files
+       * @type Object
+       * @default {}
+       */
+      files: {
+        type: Array,
+        value: function() {return [];}
+      },
+      /**
+       * Indicates whether multiple files are allowed (true) or only a single file (false)
+       * @property _isAdvancedUpload
+       * @type Boolean
+       * @default function
+       */
+      _isAdvancedUpload: {
+        type: Boolean,
+        value: function() {
+          var div = document.createElement('div');
+          return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+        }
+      }
+    },
+
+    /**
+     * Ready function, enables the drag and drop area if the feature is supported
+     *
+     * @method ready
+     */
+    ready: function() {
+      if(this._isAdvancedUpload){
+        var dropZone = this.$.dropZone;
+        this.ondragover = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",true,dropZone);
+        }
+        this.ondragleave = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",false,dropZone);
+        }
+        this.ondrop = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",false,dropZone);
+          if(!this.multi && e.dataTransfer.files.length > 1){
+            //TODO: Validation error message to user.
+            console.log('Oops. Too many files provided when multi is not enabled.');
+            return;
+          }
+          this.$.fileInput.files = e.dataTransfer.files;
+        }
+      }
+    },
+
+    /**
+     * Converts the FileList object to an array for usage in dom-repeat,
+     * this also allows us to remove individual files from the property,
+     * which is not supported by the fileList Object bound to the input.
+     *
+     * @method _toArray
+     * @param object
+     */
+    _toArray: function(obj) {
+      return  Object.keys(obj).map(function(key) {
+        return obj[key]
+      });
+    },
+
+    /**
+     * Handles changes to the selected files.
+     *
+     * @method _fileChange
+     * @param event
+     */
+    _fileChange: function(e) {
+      this.files = this._toArray(e.target.files);
+      if(!this.multiple) {
+        var filesize = this._readableFileSize(this.files[0].size);
+        this.$$('#fileList').value = this.files[0].name + ' (' + filesize + ')';
+      }
+    },
+
+    /**
+     * Removes a file from the list when the corresponding icon is clicked
+     * and hides the header row of the table if the last file is removed.
+     * Also clears the hidden input to prevent a mismatch situation and to make
+     * sure that onChange gets called if the user chooses the same file again.
+     *
+     * @method _removeFile
+     * @param event
+     */
+    _removeFile: function(e) {
+      this.splice("files",e.target.id,1);
+      if(this.multiple && this.files.length === 0){
+        this.$$('#headerRow').hidden = true;
+      }
+      this.$.fileInput.value = "";
+    },
+
+    /**
+     * Converts bytes into a human-readable format.
+     *
+     * @method _readableFileSize
+     * @param integer
+     */
+    _readableFileSize: function(bytes) {
+      var i = -1;
+      var units = [' KB',' MB',' GB'];
+      do {
+        bytes = bytes / 1024;
+        i++;
+      } while (bytes > 1024);
+      return Math.max(bytes,0.1).toFixed(1) + units[i];
+    }
+
+  });
+</script>
