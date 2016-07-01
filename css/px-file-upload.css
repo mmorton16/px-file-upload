@@ -759,6 +759,30 @@ textarea {
 .form-field--inline .text-input {
   margin-bottom: 1.3333333333rem; }
 
+/**
+   * Styles for validation states
+   */
+.validation-warning {
+  color: #dd6b1f; }
+
+.validation-error {
+  color: #e53838; }
+
+.validation-success {
+  color: #46ad00; }
+
+.text-input.validation-warning {
+  border-color: #dd6b1f;
+  color: inherit; }
+
+.text-input.validation-error {
+  border-color: #e53838;
+  color: inherit; }
+
+.text-input.validation-success {
+  border-color: #46ad00;
+  color: inherit; }
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -839,6 +863,21 @@ button.btn {
 */
 .btn + .btn {
   margin-left: 0.6666666667rem; }
+
+/**
+   * Change button colors for disabled buttons
+   */
+.btn--disabled, .btn--disabled:link, .btn--disabled:visited, .btn--disabled:hover, .btn--disabled:active,
+.btn[disabled],
+.btn[disabled]:link,
+.btn[disabled]:visited,
+.btn[disabled]:hover,
+.btn[disabled]:active {
+  border-color: #d1d0d8;
+  box-shadow: none;
+  cursor: not-allowed;
+  background-color: white;
+  color: #d1d0d8; }
 
 .btn-group {
   display: -ms-flexbox;
@@ -2893,8 +2932,17 @@ button.btn {
   text-align: left;
   padding-right: 10px; }
 
+#dropZone {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
 #dropZone.hover {
-  border: 1px dashed #525156; }
+  outline: 2px dashed #525156;
+  outline-offset: 2px;
+  background-color: rgba(0, 0, 0, 0.15); }
+
+#validation {
+  color: #e53838; }
 
 /*------------------------------------*    #CLEARFIX
 \*------------------------------------*/

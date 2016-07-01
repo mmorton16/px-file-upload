@@ -2,7 +2,8 @@
 
 ## Overview
 
-Px-File-Upload is a Predix UI component
+Px-File-Upload is a Predix UI component that provides users the ability to upload
+one or more files, whether as part of a larger form, or as a standalone component.
 
 ## Usage
 
@@ -19,27 +20,27 @@ Node, npm and bower are necessary to install the component and dependencies. web
 First, install the component via bower on the command line.
 
 ```
-bower install Px-File-Upload --save
+bower install px-file-upload --save
 ```
 
 Second, import the component to your application with the following tag in your head.
 
 ```
-<link rel="import" href="/bower_components/Px-File-Upload/Px-File-Upload.html"/>
+<link rel="import" href="/bower_components/px-file-upload/px-file-upload.html"/>
 ```
 
 Finally, use the component in your application:
 
 ```
-Insert Your demo code here.
+<px-file-upload></px-file-upload>
 ```
 
 <br />
 <hr />
 
-## documentation
+## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/Px-File-Upload).
+Read the full API and view the demo [here](https://predixdev.github.io/px-file-upload).
 
 The documentation in this repository is supplemental to the official Predix documentation, which is continuously updated and maintained by the Predix documentation team. Go to [http://predix.io](http://predix.io)  to see the official Predix documentation.
 
@@ -79,4 +80,4 @@ $ grunt devmode
 
 ## Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/Px-File-Upload/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/PredixDev/px-file-upload/issues) to submit any bugs you might find.

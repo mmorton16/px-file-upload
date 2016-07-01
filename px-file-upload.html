@@ -22,10 +22,10 @@ Element providing solution to no problem in particular. As a simple example, inc
   <link rel="import" type="css" href="css/px-file-upload.css"/>
   <template>
     <div id="dropZone" class="fieldset">
-      <span hidden$="{{!_isAdvancedUpload}}">Drag and drop files here, or click the button below.</span><br/>
+      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><i class="fa fa-cloud-upload"></i>&nbsp;Drag and drop files here, or click the button below.<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
-        <table class="table table--small table--rows" id="fileTable">
-          <tr id="headerRow" hidden>
+        <table class="table table--small table--rows hidden" id="fileTable">
+          <tr>
             <th>Name</th>
             <th>Size</th>
             <th>Type</th>
@@ -36,16 +36,16 @@ Element providing solution to no problem in particular. As a simple example, inc
               <td>{{item.name}}</td>
               <td>{{_readableFileSize(item.size)}}</td>
               <td>{{item.type}}</td>
-              <td><i id="{{index}}" class="fa fa-minus-circle" on-click="_removeFile"/></td>
+              <td><i id="icon{{index}}" class="fa fa-minus-circle" on-click="_removeFile"/></td>
             </tr>
           </template>
         </table>
       </template>
-      <label class="btn btn--small btn--secondary">Choose File
-        <input id="fileInput" type="file" on-change="_fileChange" multiple={{multiple}} hidden></input>
+      <label id="fileButton" class="btn">Choose File
+        <input id="fileInput" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
-      <template is="dom-if" if="{{!multiple}}">
-        <input id="fileList" class$="text-input input--{{size}}" type="text" placeholder="No file selected" disabled></input>
+      <span id="fileList">No file selected</span>
+      <span id="validation" class="hidden"></span>
       </template>
 
     </div>
@@ -59,7 +59,17 @@ Element providing solution to no problem in particular. As a simple example, inc
 
     properties: {
       /**
-       * Indicates whether multiple files are allowed (true) or only a single file (false)
+       * Specifies which MIME types are accepted by the file upload component.
+       * @property accept
+       * @type String
+       * @default ""
+       */
+      accept: {
+        type: String,
+        value: ""
+      },
+      /**
+       * Indicates whether multiple files are allowed (true) or only a single file (false).
        * @property multiple
        * @type Boolean
        * @default false
@@ -69,17 +79,7 @@ Element providing solution to no problem in particular. As a simple example, inc
         value: false
       },
       /**
-       * Allows the developer to specify which size to use for the input text box
-       * @property size
-       * @type String
-       * @default small
-       */
-      size: {
-        type: String,
-        value: 'small'
-      },
-      /**
-       * FileList object which stores information regarding the files to upload
+       * FileList object which stores information regarding the files to upload.
        * @property files
        * @type Object
        * @default {}
@@ -89,7 +89,18 @@ Element providing solution to no problem in particular. As a simple example, inc
         value: function() {return [];}
       },
       /**
-       * Indicates whether multiple files are allowed (true) or only a single file (false)
+       * Flag which allows developer to disable the file upload field.
+       * @property disabled
+       * @type Boolean
+       * @default false
+       */
+      disabled: {
+        type: Boolean,
+        value: false,
+        observer: '_disable'
+      },
+      /**
+       * Checks whether the user's browser supports advanced drag and drop functionality.
        * @property _isAdvancedUpload
        * @type Boolean
        * @default function
@@ -104,12 +115,12 @@ Element providing solution to no problem in particular. As a simple example, inc
     },
 
     /**
-     * Ready function, enables the drag and drop area if the feature is supported
+     * Ready function, enables the drag and drop area if the feature is supported.
      *
      * @method ready
      */
     ready: function() {
-      if(this._isAdvancedUpload){
+      if(this._isAdvancedUpload && !this.disabled){
         var dropZone = this.$.dropZone;
         this.ondragover = function(e) {
           e.preventDefault();
@@ -125,12 +136,37 @@ Element providing solution to no problem in particular. As a simple example, inc
           e.preventDefault();
           e.stopPropagation();
           this.toggleClass("hover",false,dropZone);
-          if(!this.multi && e.dataTransfer.files.length > 1){
-            //TODO: Validation error message to user.
-            console.log('Oops. Too many files provided when multi is not enabled.');
+          if(!this.multiple) {
+            if(e.dataTransfer.files.length > 1){
+              this.$$('#validation').innerHTML = "Only one file is allowed.";
+              this.toggleClass('hidden',false,this.$$('#validation'));
+              this.toggleClass('hidden',true,this.$$('#fileList'));
+              return;
+            }
+            if(this.accept !== "" && !this._isValid(e.dataTransfer.files[0])) {
+              this.$$('#validation').innerHTML = "Invalid file type.";
+              this.toggleClass('hidden',false,this.$$('#validation'));
+              this.toggleClass('hidden',true,this.$$('#fileList'));
+              return;
+            }
+            this.$.fileInput.files = e.dataTransfer.files;
             return;
           }
-          this.$.fileInput.files = e.dataTransfer.files;
+          else {
+            if(this.accept !== "") {
+              for(i = 0; i < e.dataTransfer.files.length; i++) {
+                var file = e.dataTransfer.files[i];
+                if(!this._isValid(file)) {
+                  this.$$('#validation').innerHTML = "Invalid file type.";
+                  this.toggleClass('hidden',false,this.$$('#validation'));
+                  this.toggleClass('hidden',true,this.$$('#fileList'));
+                  return;
+                }
+              }
+            }
+            this.$.fileInput.files = e.dataTransfer.files;
+            return;
+          }
         }
       }
     },
@@ -159,8 +195,14 @@ Element providing solution to no problem in particular. As a simple example, inc
       this.files = this._toArray(e.target.files);
       if(!this.multiple) {
         var filesize = this._readableFileSize(this.files[0].size);
-        this.$$('#fileList').value = this.files[0].name + ' (' + filesize + ')';
+        this.$$('#fileList').innerHTML = this.files[0].name + ' (' + filesize + ')';
+        this.toggleClass('hidden',false,this.$$('#fileList'));
       }
+      else {
+        this.toggleClass('hidden',false,this.$$('#fileTable'));
+        this.toggleClass('hidden',true,this.$$('#fileList'));
+      }
+      this.toggleClass('hidden',true,this.$$('#validation'));
     },
 
     /**
@@ -173,11 +215,50 @@ Element providing solution to no problem in particular. As a simple example, inc
      * @param event
      */
     _removeFile: function(e) {
-      this.splice("files",e.target.id,1);
-      if(this.multiple && this.files.length === 0){
-        this.$$('#headerRow').hidden = true;
+      if(!this.disabled) {
+        this.splice("files",e.target.id.substring(4),1);
+        if(this.multiple && this.files.length === 0){
+          this.toggleClass('hidden',true,this.$$('#fileTable'));
+          this.toggleClass('hidden',false,this.$$('#fileList'));
+        }
+        this.$.fileInput.value = "";
       }
-      this.$.fileInput.value = "";
+    },
+
+    /**
+     * Disables the file upload component (button and hidden input) if the property is set.
+     *
+     * @method _disable
+     */
+   _disable: function() {
+        this.toggleClass('btn--disabled',this.disabled,this.$$('#fileButton'));
+        this.toggleAttribute('disabled',this.disabled,this.$$('#fileInput'));
+        this.toggleClass('hidden',this.disabled,this.$$('#dndInstructions'))
+        if(this.multiple){
+          for(i = 0; i < this.files.length; i++) {
+              this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
+          }
+        }
+    },
+    /**
+     * Compares a file's type and name to the accept property to validate.
+     *
+     * @method _isValid
+     * @param object
+     */
+    _isValid: function(file) {
+      var accept = this.accept;
+      if(this.accept.indexOf(file.type) > -1) {
+        return true;
+      }
+      if(this.accept.indexOf(file.name.match(/\.[^\.]*$/)[0]) > -1) {
+        return true;
+      }
+      // TODO: need to figure out how to support wildcards like "image/*"
+      // Can use .match(/^[^\/]*\//)[0] to pull off first half of type string
+      else {
+        return false;
+      }
     },
 
     /**

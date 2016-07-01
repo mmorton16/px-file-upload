@@ -5,23 +5,26 @@ function runCustomTests() {
   // This is the placeholder suite to place custom tests in
   // Use testCase(options) for a more convenient setup of the test cases
   suite('Custom Automation Tests for px-file-upload', function() {
-    test('Check initial value of counter', function(done){
-      var counterEl = Polymer.dom(document).querySelector('px-file-upload'),
-          counterValueEl = Polymer.dom(counterEl.root).querySelector('span');
-      assert.equal(counterValueEl.textContent, '0');
+    var uploadEl = Polymer.dom(document).querySelector('#px-file-upload');
+    var filelist = {0: {name:'Test.txt',size: 5000,type:"text/plain"}};
+    test('Check that fixture  is created', function(done){
+      assert.isDefined(uploadEl);
       done();
     });
-
-    test('Clicking px-file-upload increments the counter', function(done){
-      var counterEl = Polymer.dom(document).querySelector('px-file-upload'),
-          counterValueEl = Polymer.dom(counterEl.root).querySelector('span');
-      assert.equal(counterValueEl.textContent, '0');
-
-      counterEl.click();
-      flush(function(){
-        assert.equal(counterValueEl.textContent, '1');
-      });
+    test('Check that label button exists', function(done){
+      var button = uploadEl.$$('#fileButton');
+      assert.isDefined(button);
+      done();
+    });
+    test('Check that fixture has multiple property', function(done){
+      var multiple = uploadEl.multiple;
+      assert.isTrue(multiple);
+      done();
+    });
+    test('Check that hidden input is really hidden', function(done){
+      var input = uploadEl.$$('#fileInput');
+      assert.isTrue(input.hidden);
       done();
     });
   });
-};
+}

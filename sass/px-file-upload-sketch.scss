@@ -35,11 +35,15 @@ $inuit-enable-input--small: true;
 $inuit-enable-input--regular: true;
 $inuit-enable-input--large: true;
 $inuit-enable-inline-fields: true;
+$inuit-enable-validation-states: true;
 @import "px-forms-design/_base.forms.scss";
 
 $inuit-enable-table--rows: true;
 $inuit-enable-table--small: true;
 @import "px-tables-design/_base.tables.scss";
+
+$inuit-enable-btn--disabled: true;
+$inuit-enable-btn--secondary: true;
 @import "px-meta-buttons-design/_meta.buttons.scss";
 @import "px-iconography-design/_base.iconography.scss";
 
@@ -50,8 +54,17 @@ $inuit-enable-table--small: true;
   text-align: left;
   padding-right: 10px;
 }
+#dropZone {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 #dropZone.hover {
-  border: 1px dashed $grey8;
+  outline: 2px dashed $grey8;
+  outline-offset: 2px;
+  background-color: rgba(0,0,0,.15);
+}
+#validation {
+  color: $alert-red;
 }
 
 // Trumps
