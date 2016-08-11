@@ -11,7 +11,7 @@ File upload component. Allows user to select one or more files from filesystem b
 
 ##### Usage
 
-    <px-file-upload></px-file-upload>
+    <px-file-upload multiple disabled accept=".txt,text/html"></px-file-upload>
 
 @element px-file-upload
 @blurb Drag-and-drop file upload component.
@@ -59,7 +59,7 @@ File upload component. Allows user to select one or more files from filesystem b
 
     properties: {
       /**
-       * Specifies which MIME types are accepted by the file upload component.
+       * Comma-separated list of accepted file types, expressed as file extensions (".txt") and/or MIME types ("text/html"). Wildcards ("image/*") are currently not supported.
        * @property accept
        * @type String
        * @default ""
@@ -79,7 +79,7 @@ File upload component. Allows user to select one or more files from filesystem b
         value: false
       },
       /**
-       * FileList array which stores information regarding the files to upload.
+       * FileList array which stores information regarding the files to upload. Can be accessed in the same way as a plain file input element.
        * @property files
        * @type Object
        * @default {}
@@ -89,7 +89,7 @@ File upload component. Allows user to select one or more files from filesystem b
         value: function() {return [];}
       },
       /**
-       * Flag which allows developer to disable the file upload field.
+       * Flag that disables the file upload field and prevents drag-and-drop or changing of selected files.
        * @property disabled
        * @type Boolean
        * @default false
@@ -241,17 +241,17 @@ File upload component. Allows user to select one or more files from filesystem b
         }
     },
     /**
-     * Compares a file's type and name to the accept property to validate.
+     * Compares a file's type and extension to the accept property to validate.
      *
      * @method _isValid
-     * @param object
+     * @param file
      */
     _isValid: function(file) {
       var accept = this.accept;
       if(this.accept.indexOf(file.type) > -1) {
         return true;
       }
-      if(this.accept.indexOf(file.name.match(/\.[^\.]*$/)[0]) > -1) {
+      else if(this.accept.indexOf(file.name.match(/\.[^\.]*$/)[0]) > -1) {
         return true;
       }
       // TODO: need to figure out how to support wildcards like "image/*"
@@ -265,7 +265,7 @@ File upload component. Allows user to select one or more files from filesystem b
      * Converts bytes into a human-readable format.
      *
      * @method _readableFileSize
-     * @param integer
+     * @param bytes
      */
     _readableFileSize: function(bytes) {
       var i = -1;

@@ -24,7 +24,8 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'css/noprefix/px-file-upload-sketch.css': 'sass/px-file-upload-sketch.scss',
-          'css/noprefix/px-file-upload.css': 'sass/px-file-upload-predix.scss'
+          'css/noprefix/px-file-upload.css': 'sass/px-file-upload-predix.scss',
+          'css/noprefix/px-file-upload-demo.css': 'sass/px-file-upload-demo.scss'
         }
       }
     },

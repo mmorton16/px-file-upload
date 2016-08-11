@@ -1,8 +1,9 @@
-#Px-File-Upload
+#px-file-upload [![Build Status](https://travis-ci.org/PredixDev/px-file-upload.svg?branch=master)](https://travis-ci.org/PredixDev/px-file-upload)
+[![px-file-upload demo](px-file-upload.png?raw=true)](https://PredixDev.github.io/px-file-upload/)
 
 ## Overview
 
-Px-File-Upload is a Predix UI component that provides users the ability to upload
+px-file-upload is a Predix UI component that provides users the ability to upload
 one or more files, whether as part of a larger form, or as a standalone component.
 
 ## Usage
@@ -32,7 +33,7 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```
-<px-file-upload></px-file-upload>
+<px-file-upload multiple disabled accept=".txt,text/html"></px-file-upload>
 ```
 
 <br />
