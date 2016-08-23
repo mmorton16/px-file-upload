@@ -1,6 +1,6 @@
 {
   "name": "px-file-upload",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": [
     "px-file-upload.html"
   ],
@@ -14,7 +14,7 @@
     "test",
     "scripts",
     ".github",
-    "px-percent-circle.png",
+    "px-file-upload.png",
     "OSS_Notice.pdf"
   ],
   "dependencies": {
@@ -31,7 +31,7 @@
     "px-typography-design": "~0.3.2",
     "px-tabs": "~0.4.0",
     "px-api-viewer": "^0.0.4",
-    "px-demo-snippet": "^0.1.0",
+    "px-demo-snippet": "^0.3.1",
     "px-toggle-design": "^0.2.12",
     "px-headings-design": "^0.2.13",
     "px-actionable-text-icons-design": "^0.0.3",
