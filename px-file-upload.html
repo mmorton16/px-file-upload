@@ -18,9 +18,13 @@ File upload component. Allows user to select one or more files from filesystem b
 @homepage index.html
 @demo demo.html
 -->
+
+<link rel="import" href="css/px-file-upload-styles.html">
+
 <dom-module id="px-file-upload">
-  <link rel="import" type="css" href="css/px-file-upload.css"/>
   <template>
+    <style include="px-file-upload-styles"></style>
+    <style include="px-theme-styles"></style>
     <div id="dropZone" class="fieldset">
       <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><i class="fa fa-cloud-upload"></i>&nbsp;Drag and drop files here, or click the button below.<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
