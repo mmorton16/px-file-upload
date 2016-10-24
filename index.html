@@ -76,7 +76,7 @@
                 <!-- demo -->
                 <div class="flex flex--col">
                   <div class="demo u-p+">
-
+                    <span id="counter{{indexPlusOne(index)}}">The <strong>px-file-upload-files-changed</strong> event has fired <strong>0</strong> time(s)</span>
                     <div style="max-width:400px;max-height:400px;">
                       <form>
                         <fieldset>
@@ -127,7 +127,7 @@
             <li>
               <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
             </li>
-            <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
+            <li>Copyright &copy; 2016 General Electric Company. All rights reserved.</li>
           </ul>
         </div>
       </div>
@@ -136,7 +136,7 @@
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
-      year = new Date();
+  counter = 0;
 
   var optionsArray = [
         {
@@ -154,12 +154,18 @@ window.addEventListener('WebComponentsReady', function() {
     var indexPlusOne = function(num) {
       return num + 1;
     };
-    year = year.getFullYear();
+
+    document.addEventListener('px-file-upload-files-changed', function(evt) {
+      counter++;
+      for(var i=1; i<=optionsArray.length; i++) {
+        var span = document.getElementById('counter'+i);
+        span.innerHTML = 'The <strong>px-file-upload-files-changed</strong> event has fired <strong>' + counter + '</strong> time(s)';
+      }
+    });
 
     template.selected = "0";
     template.optionsArray = optionsArray;
     template.indexPlusOne = indexPlusOne;
-    template.year = year;
 
 });
 </script>
