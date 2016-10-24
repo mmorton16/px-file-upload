@@ -1,3 +1,8 @@
+v0.2.0
+==================
+* merged PR #2 which added file change event
+* updated demo with new event functionality
+
 v0.0.4
 ==================
 * added codepen
