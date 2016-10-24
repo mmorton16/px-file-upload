@@ -207,6 +207,7 @@ File upload component. Allows user to select one or more files from filesystem b
         this.toggleClass('hidden',true,this.$$('#fileList'));
       }
       this.toggleClass('hidden',true,this.$$('#validation'));
+      this._notifyFilesChange();
     },
 
     /**
@@ -279,6 +280,15 @@ File upload component. Allows user to select one or more files from filesystem b
         i++;
       } while (bytes > 1024);
       return Math.max(bytes,0.1).toFixed(1) + units[i];
+    },
+
+    /**
+     * Fires an event upon file(s) change.
+     *
+     * @method _notifyFilesChange
+     */
+    _notifyFilesChange: function() {
+      this.fire('file-change');
     }
 
   });
