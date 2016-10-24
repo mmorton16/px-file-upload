@@ -83,7 +83,9 @@ File upload component. Allows user to select one or more files from filesystem b
         value: false
       },
       /**
-       * FileList array which stores information regarding the files to upload. Can be accessed in the same way as a plain file input element.
+       * FileList array which stores information regarding the files to upload.
+       * Can be accessed in the same way as a plain file input element
+       * (<a href="https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications#Handling_the_upload_process_for_a_file" target=_blank>see MDN for more info</a>).
        * @property files
        * @type Object
        * @default {}
@@ -207,6 +209,7 @@ File upload component. Allows user to select one or more files from filesystem b
         this.toggleClass('hidden',true,this.$$('#fileList'));
       }
       this.toggleClass('hidden',true,this.$$('#validation'));
+      this._notifyFilesChanged();
     },
 
     /**
@@ -279,6 +282,20 @@ File upload component. Allows user to select one or more files from filesystem b
         i++;
       } while (bytes > 1024);
       return Math.max(bytes,0.1).toFixed(1) + units[i];
+    },
+
+    /**
+     * Fires an event when selected file(s) are changed.
+     *
+     * @method _notifyFilesChanged
+     */
+     /**
+      * Event fired when selected file(s) are changed.
+      *
+      * @event px-file-upload-files-changed
+      */
+    _notifyFilesChanged: function() {
+      this.fire('px-file-upload-files-changed');
     }
 
   });
