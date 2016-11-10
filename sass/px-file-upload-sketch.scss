@@ -50,23 +50,6 @@ $inuit-enable-btn--secondary: true;
 
 // Component
 
-#fileTable, #fileTable th, #fileTable td {
-  text-align: left;
-  padding-right: 10px;
-}
-#dropZone {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-#dropZone.hover {
-  outline: 2px dashed $grey8;
-  outline-offset: 2px;
-  background-color: rgba(0,0,0,.15);
-}
-#validation {
-  color: $alert-red;
-}
-
 // Trumps
 @import "inuit-clearfix/_trumps.clearfix.scss";
 @import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";

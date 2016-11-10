@@ -1,3 +1,7 @@
+v0.2.1
+==================
+* added style variables for theming
+
 v0.2.0
 ==================
 * merged PR #2 which added file change event
