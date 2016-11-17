@@ -1,3 +1,7 @@
+v0.2.6
+==================
+* added iron-icon
+
 v0.2.5
 ==================
 * removing px-theme style call
