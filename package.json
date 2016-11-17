@@ -2,7 +2,7 @@
     "name": "px-file-upload",
     "author": "General Electric",
     "description": "A drag and drop file upload component.",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "extName": null,
     "repository": {
         "type": "git",
