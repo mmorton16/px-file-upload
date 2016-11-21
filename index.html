@@ -85,7 +85,8 @@
                             id="fileEl{{indexPlusOne(index)}}"
                             multiple="{{item.multiple}}"
                             disabled="{{item.disabled}}"
-                            accept="{{item.accept}}">
+                            accept="{{item.accept}}"
+                            message="[[item.message]]">
                           </px-file-upload>
                         </fieldset>
                       </form>
@@ -140,11 +141,19 @@ window.addEventListener('WebComponentsReady', function() {
 
   var optionsArray = [
         {
+          "message": "Drag and drop files here, or click the button below.",
           "multiple": false,
           "disabled": false,
           "accept": ""
         },
         {
+          "message": "Drag and drop files here, or click the button below.",
+          "multiple": true,
+          "disabled": false,
+          "accept": ".txt,text/html,application/json"
+        },
+        {
+          "message": "Any message can be displayed here",
           "multiple": true,
           "disabled": false,
           "accept": ".txt,text/html,application/json"

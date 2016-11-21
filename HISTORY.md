@@ -1,3 +1,7 @@
+v0.3.0
+==================
+* added the ability to customize the message.
+
 v0.2.6
 ==================
 * added iron-icon

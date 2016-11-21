@@ -6,6 +6,7 @@ function runCustomTests() {
   // Use testCase(options) for a more convenient setup of the test cases
   suite('Custom Automation Tests for px-file-upload', function() {
     var uploadEl = Polymer.dom(document).querySelector('#px-file-upload');
+    var uploadEl2 = Polymer.dom(document).querySelector('#px-file-upload2');
     var filelist = {0: {name:'Test.txt',size: 5000,type:"text/plain"}};
     test('Check that fixture  is created', function(done){
       assert.isDefined(uploadEl);
@@ -26,5 +27,17 @@ function runCustomTests() {
       assert.isTrue(input.hidden);
       done();
     });
+    test('Check that message is "test message"', function(done){
+      var span = uploadEl2.$.dndInstructions,
+          message = span.textContent.trim(); //the trim removes \n lines
+      assert.equal(message, "test message");
+      done();
+    });
+
+
+
+    dndInstructions
+
+
   });
 }

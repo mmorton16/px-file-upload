@@ -34,9 +34,8 @@ Custom property | Description | Default
 <dom-module id="px-file-upload">
   <template>
     <style include="px-file-upload-styles"></style>
-
     <div id="dropZone" class="fieldset">
-      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;Drag and drop files here, or click the button below.<br/><br/></span>
+      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;[[message]]<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">
           <tr>
@@ -70,8 +69,16 @@ Custom property | Description | Default
   Polymer({
 
     is: 'px-file-upload',
-
+    /**
+     * the message that shows up above the upload button.
+     * @type String
+     * @default "Drag and drop files here, or click the button below."
+     */
     properties: {
+      message: {
+        type: String,
+        value: "Drag and drop files here, or click the button below."
+      },
       /**
        * Comma-separated list of accepted file types, expressed as file extensions (".txt") and/or MIME types ("text/html"). Wildcards ("image/*") are currently not supported.
        * @property accept
