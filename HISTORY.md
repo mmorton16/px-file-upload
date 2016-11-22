@@ -1,3 +1,7 @@
+v0.3.1
+==================
+* fixed validation logic for file type
+
 v0.3.0
 ==================
 * added the ability to customize the message.

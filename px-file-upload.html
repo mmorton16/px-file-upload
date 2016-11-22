@@ -166,14 +166,21 @@ Custom property | Description | Default
               this.toggleClass('hidden',true,this.$$('#fileList'));
               return;
             }
-            if(this.accept !== "" && !this._isValid(e.dataTransfer.files[0])) {
-              this.$$('#validation').innerHTML = "Invalid file type.";
-              this.toggleClass('hidden',false,this.$$('#validation'));
-              this.toggleClass('hidden',true,this.$$('#fileList'));
-              return;
+            if(this.accept !== "") {
+              if(!this._isValid(e.dataTransfer.files[0])) {
+                this.$$('#validation').innerHTML = "Invalid file type.";
+                this.toggleClass('hidden',false,this.$$('#validation'));
+                this.toggleClass('hidden',true,this.$$('#fileList'));
+                return;
+              }
+              else {
+                this.$$('#validation').innerHTML = "";
+                this.toggleClass('hidden',true,this.$$('#validation'));
+                this.toggleClass('hidden',false,this.$$('#fileList'));
+                this.$.fileInput.files = e.dataTransfer.files;
+                return;
+              }
             }
-            this.$.fileInput.files = e.dataTransfer.files;
-            return;
           }
           else {
             if(this.accept !== "") {
@@ -187,6 +194,9 @@ Custom property | Description | Default
                 }
               }
             }
+            this.$$('#validation').innerHTML = "";
+            this.toggleClass('hidden',true,this.$$('#validation'));
+            this.toggleClass('hidden',false,this.$$('#fileList'));
             this.$.fileInput.files = e.dataTransfer.files;
             return;
           }
