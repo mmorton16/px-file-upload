@@ -1,3 +1,7 @@
+v0.3.2
+==================
+* Update px-theme to 2.0.1 and update test fixtures
+
 v0.3.1
 ==================
 * fixed validation logic for file type
