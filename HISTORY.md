@@ -1,3 +1,7 @@
+v0.3.4
+==================
+* updated css vars for dark theme
+
 v0.3.3
 ==================
 * changing all devDeps to ^

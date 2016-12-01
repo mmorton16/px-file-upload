@@ -21,7 +21,7 @@ Custom property | Description | Default
 `--px-file-upload-validation-color` | Text color for invalid file error messages | `$alert-red`
 `--px-file-upload-dropzone-background-color` | Background color for the dropzone | `rgba(0,0,0,.15)`
 `--px-file-upload-dropzone-border-color` | Border color for the dropzone | `$gray8`
-
+`--px-file-upload-dropzone-text-color` | The text color in the dropzone | `$black`
 
 @element px-file-upload
 @blurb Drag-and-drop file upload component.
@@ -34,7 +34,7 @@ Custom property | Description | Default
 <dom-module id="px-file-upload">
   <template>
     <style include="px-file-upload-styles"></style>
-    <div id="dropZone" class="fieldset">
+    <div id="dropZone" class="fieldset u-p-">
       <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;[[message]]<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">

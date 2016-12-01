@@ -31,11 +31,12 @@ common/abstract rules go in px-file-upload-sketch.scss, not in this file.
 #dropZone {
   padding-top: 5px;
   padding-bottom: 5px;
+  background-color: var(--px-file-upload-dropzone-background-color, rgba(0,0,0,.15));
+  outline: 2px dashed var(--px-file-upload-dropzone-border-color, $gray8);
+  color: var(--px-file-upload-dropzone-text-color, $black);
 }
 #dropZone.hover {
-  outline: 2px dashed var(--px-file-upload-dropzone-border-color, $gray8);
   outline-offset: 2px;
-  background-color: var(--px-file-upload-dropzone-background-color, rgba(0,0,0,.15));
 }
 #validation {
   color: var(--px-file-upload-validation-color, $alert-red);
