@@ -1,3 +1,8 @@
+v0.3.5
+==================
+* fixed broken styles
+* fixed invalid file checking logic
+
 v0.3.4
 ==================
 * updated css vars for dark theme
