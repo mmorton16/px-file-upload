@@ -1,3 +1,7 @@
+v0.4.1
+==================
+* merge PR #6 for edge cases
+
 v0.4.0
 ==================
 * Updated dependencies
