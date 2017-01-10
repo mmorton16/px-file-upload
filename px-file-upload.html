@@ -166,6 +166,8 @@ Custom property | Description | Default
               this.$$('#validation').innerHTML = "Only one file is allowed.";
               this.toggleClass('hidden',false,this.$$('#validation'));
               this.toggleClass('hidden',true,this.$$('#fileList'));
+              this.$.fileInput.value = "";
+              this.files = [];
               return;
             }
             if(this.accept !== "") {
@@ -174,6 +176,17 @@ Custom property | Description | Default
                 this.$$('#validation').innerHTML = "Invalid file type.";
                 this.toggleClass('hidden',false,this.$$('#validation'));
                 this.toggleClass('hidden',true,this.$$('#fileList'));
+                this.$.fileInput.value = "";
+                this.files = [];
+                return;
+              }
+              else {
+                this.$$('#validation').innerHTML = "";
+                this.toggleClass('hidden',true,this.$$('#validation'));
+                this.toggleClass('hidden',false,this.$$('#fileList'));
+                this.$.fileInput.files = e.dataTransfer.files;
+                this.$.fileInput.value = "";
+                this.files = [];
                 return;
               }
             }
@@ -195,6 +208,8 @@ Custom property | Description | Default
                   this.$$('#validation').innerHTML = "Invalid file type.";
                   this.toggleClass('hidden',false,this.$$('#validation'));
                   this.toggleClass('hidden',true,this.$$('#fileList'));
+                  this.$.fileInput.value = "";
+                  this.files = [];
                   return;
                 }
               }
@@ -232,15 +247,26 @@ Custom property | Description | Default
      */
     _fileChange: function(e) {
       this.files = this._toArray(e.target.files);
-      if(!this.multiple) {
-        var filesize = this._readableFileSize(this.files[0].size);
-        this.$$('#fileList').innerHTML = this.files[0].name + ' (' + filesize + ')';
+
+      if (this.files.length === 0) {
+        this.$$('#fileList').innerHTML = 'No file selected';
+        if(this.multiple) {
+          this.toggleClass('hidden',true,this.$$('#fileTable'));
+        }
         this.toggleClass('hidden',false,this.$$('#fileList'));
       }
       else {
-        this.toggleClass('hidden',false,this.$$('#fileTable'));
-        this.toggleClass('hidden',true,this.$$('#fileList'));
+        if(!this.multiple) {
+          var filesize = this._readableFileSize(this.files[0].size);
+          this.$$('#fileList').innerHTML = this.files[0].name + ' (' + filesize + ')';
+          this.toggleClass('hidden',false,this.$$('#fileList'));
+        }
+        else {
+          this.toggleClass('hidden',false,this.$$('#fileTable'));
+          this.toggleClass('hidden',true,this.$$('#fileList'));
+        }
       }
+
       this.toggleClass('hidden',true,this.$$('#validation'));
       this._notifyFilesChanged();
     },
