@@ -71,6 +71,7 @@
                 </div>
                 <div class="u-mb-">Accept: <input class="text-input" type="text" placeholder="{{item.accept}}" value="{{item.accept::input}}" /></div>
                 <div class="u-mb-">Message: <input class="text-input" type="text" placeholder="{{item.message}}" value="{{item.message::input}}" /></div>
+                <div class="u-mb-">Language: <input class="text-input" type="text" placeholder="{{item.language}}" value="{{item.language::input}}" /></div>
               </div>
 
               <div class="demoContainer clearfix u-mt+">
@@ -87,6 +88,7 @@
                             multiple="{{item.multiple}}"
                             disabled="{{item.disabled}}"
                             accept="{{item.accept}}"
+                            language="[[item.language]]"
                             message="[[item.message]]">
                           </px-file-upload>
                         </fieldset>
@@ -145,18 +147,21 @@ window.addEventListener('WebComponentsReady', function() {
           "message": "Drag and drop files here, or click the button below.",
           "multiple": false,
           "disabled": false,
+          "language": "en",
           "accept": ""
         },
         {
           "message": "Drag and drop files here, or click the button below.",
           "multiple": true,
           "disabled": false,
+          "language": "zh-cn",
           "accept": ".txt,text/html,application/json"
         },
         {
           "message": "Any message can be displayed here",
           "multiple": true,
           "disabled": false,
+          "language": "en",
           "accept": ".txt,text/html,application/json"
         }
       ];
