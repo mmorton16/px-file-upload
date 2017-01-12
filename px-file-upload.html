@@ -71,23 +71,25 @@ Custom property | Description | Default
   Polymer({
 
     is: 'px-file-upload',
+    /**
+    * use app-localize-behavior to realize internationalization
+    */
     behaviors: [
         Polymer.AppLocalizeBehavior
-      ],
-
+    ],
     properties: {
       language: {
-            value: 'en',
-            type: String
-      },
-      formats: {
-          type: Object,
-          value: function() {
-            return {
-              number: { USD: { style: 'currency', currency: 'USD' } }
-            };
-          }
-        },
+        value: 'en',
+        type: String
+    },
+    formats: {
+      type: Object,
+      value: function() {
+        return {
+          number: { USD: { style: 'currency', currency: 'USD' } }
+        };
+      }
+    },
     /**
      * the message that shows up above the upload button.
      * @type String
