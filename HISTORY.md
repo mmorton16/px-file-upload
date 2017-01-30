@@ -1,3 +1,7 @@
+v0.4.4
+==================
+* Updating bower so pick up px-demo-snippet and px-api-viewer get new grays
+
 v0.4.3
 ==================
 * Update colors design to pick up new colors
