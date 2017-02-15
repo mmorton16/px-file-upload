@@ -1,6 +1,6 @@
 v0.4.4
 ==================
-* Updating bower so pick up px-demo-snippet and px-api-viewer get new grays
+* Updating so px-demo-snippet and px-api-viewer get new grays
 
 v0.4.3
 ==================
