@@ -1,3 +1,7 @@
+v0.4.5
+==================
+* updated to new demo using px-demo
+
 v0.4.4
 ==================
 * Updating so px-demo-snippet and px-api-viewer get new grays
