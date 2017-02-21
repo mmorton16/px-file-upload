@@ -1,3 +1,7 @@
+v0.4.6
+==================
+* merge PR #9
+
 v0.4.5
 ==================
 * updated to new demo using px-demo
