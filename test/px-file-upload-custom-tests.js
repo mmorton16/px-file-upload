@@ -7,6 +7,7 @@ function runCustomTests() {
   suite('Custom Automation Tests for px-file-upload', function() {
     var uploadEl = Polymer.dom(document).querySelector('#px-file-upload');
     var uploadEl2 = Polymer.dom(document).querySelector('#px-file-upload2');
+    var uploadEl3 = Polymer.dom(document).querySelector('#px-file-upload3');
     var filelist = {0: {name:'Test.txt',size: 5000,type:"text/plain"}};
     test('Check that fixture  is created', function(done){
       assert.isDefined(uploadEl);
@@ -31,6 +32,12 @@ function runCustomTests() {
       var span = uploadEl2.$.dndInstructions,
           message = span.textContent.trim(); //the trim removes \n lines
       assert.equal(message, "test message");
+      done();
+    });
+    test('Check multiple language is zh-cn"', function(done){
+      var button = uploadEl3.$$('#fileButton');
+      button = button.textContent.trim();
+      assert.equal(button,"选择文件");
       done();
     });
 
