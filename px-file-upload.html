@@ -5,7 +5,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <!--
 File upload component. Allows user to select one or more files from filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
 
@@ -38,9 +38,9 @@ Custom property | Description | Default
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">
           <tr>
-            <th>Name</th>
-            <th>Size</th>
-            <th>Type</th>
+            <th>{{localize('Name')}}</th>
+            <th>{{localize('Size')}}</th>
+            <th>{{localize('Type')}}</th>
             <th></th>
           </tr>
           <template is="dom-repeat" items="{{files}}">
@@ -53,10 +53,10 @@ Custom property | Description | Default
           </template>
         </table>
       </template>
-      <label id="fileButton" class="btn">Choose File
+      <label id="fileButton" class="btn">{{localize('Choose File')}}
         <input id="fileInput" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
-      <span id="fileList">No file selected</span>
+      <span id="fileList">{{localize('No file selected')}}</span>
       <span id="validation" class="hidden"></span>
       </template>
 
@@ -69,11 +69,26 @@ Custom property | Description | Default
 
     is: 'px-file-upload',
     /**
+    * use app-localize-behavior to realize internationalization
+    */
+    behaviors: [
+        Polymer.AppLocalizeBehavior
+    ],
+    properties: {
+    /**
+     * The multiple language options, support en , zh-cn now
+     * @type String
+     * @default "en"
+     */
+      language: {
+        value: 'en',
+        type: String
+    },
+    /**
      * the message that shows up above the upload button.
      * @type String
      * @default "Drag and drop files here, or click the button below."
      */
-    properties: {
       message: {
         type: String,
         value: "Drag and drop files here, or click the button below."
@@ -135,7 +150,9 @@ Custom property | Description | Default
         }
       }
     },
-
+    attached: function() {
+      this.loadResources(this.resolveUrl('locales.json'));
+    },
     /**
      * Ready function, enables the drag and drop area if the feature is supported.
      *
@@ -162,7 +179,7 @@ Custom property | Description | Default
           if(!this.multiple) {
             // Multiple files dropped, only one allowed
             if(e.dataTransfer.files.length > 1){
-              this.$$('#validation').innerHTML = "Only one file is allowed.";
+              this.$$('#validation').innerHTML = this.localize("Only one file is allowed.");
               this.toggleClass('hidden',false,this.$$('#validation'));
               this.toggleClass('hidden',true,this.$$('#fileList'));
               this.$.fileInput.value = "";
@@ -172,7 +189,7 @@ Custom property | Description | Default
             if(this.accept !== "") {
               // Invalid file type was dropped
               if(!this._isValid(e.dataTransfer.files[0])) {
-                this.$$('#validation').innerHTML = "Invalid file type.";
+                this.$$('#validation').innerHTML = this.localize("Invalid file type.");
                 this.toggleClass('hidden',false,this.$$('#validation'));
                 this.toggleClass('hidden',true,this.$$('#fileList'));
                 this.$.fileInput.value = "";
@@ -202,7 +219,7 @@ Custom property | Description | Default
               for(i = 0; i < e.dataTransfer.files.length; i++) {
                 var file = e.dataTransfer.files[i];
                 if(!this._isValid(file)) {
-                  this.$$('#validation').innerHTML = "Invalid file type.";
+                  this.$$('#validation').innerHTML = this.localize("Invalid file type.");
                   this.toggleClass('hidden',false,this.$$('#validation'));
                   this.toggleClass('hidden',true,this.$$('#fileList'));
                   this.$.fileInput.value = "";
@@ -246,7 +263,7 @@ Custom property | Description | Default
       this.files = this._toArray(e.target.files);
 
       if (this.files.length === 0) {
-        this.$$('#fileList').innerHTML = 'No file selected';
+        this.$$('#fileList').innerHTML = this.localize('No file selected');
         if(this.multiple) {
           this.toggleClass('hidden',true,this.$$('#fileTable'));
         }

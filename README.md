@@ -36,6 +36,14 @@ Finally, use the component in your application:
 <px-file-upload multiple disabled accept=".txt,text/html"></px-file-upload>
 ```
 
+More, multiple-language support:
+
+language = "en"
+
+Currently we only support English(en) and simplified Chinese(zh-cn)
+
+
+
 <br />
 <hr />
 
