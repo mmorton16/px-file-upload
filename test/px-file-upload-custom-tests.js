@@ -41,10 +41,5 @@ function runCustomTests() {
       done();
     });
 
-
-
-    dndInstructions
-
-
   });
 }
