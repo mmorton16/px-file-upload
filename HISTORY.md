@@ -1,3 +1,7 @@
+v0.4.8
+==================
+* fixed spacing per design feedback
+
 v0.4.7
 ==================
 * merge PR #8
