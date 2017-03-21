@@ -76,16 +76,18 @@ Custom property | Description | Default
     ],
     properties: {
     /**
-     * The multiple language options, support en , zh-cn now
-     * @type String
-     * @default "en"
-     */
+      * A valid IETF language tag as a string that `app-localize-behavior` will
+      * use to localize this component. Refer to locales.json for currently supported languages.
+      *
+      * See https://github.com/PolymerElements/app-localize-behavior for API
+      * documentation and more information.
+      */
       language: {
         value: 'en',
         type: String
     },
     /**
-     * the message that shows up above the upload button.
+     * The message that shows up above the upload button.
      * @type String
      * @default "Drag and drop files here, or click the button below."
      */

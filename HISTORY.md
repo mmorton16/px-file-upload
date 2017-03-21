@@ -1,3 +1,7 @@
+v0.4.9
+==================
+* hide app-localize props from API
+
 v0.4.8
 ==================
 * fixed spacing per design feedback

@@ -57,7 +57,7 @@
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer source="px-file-upload"></px-demo-api-viewer>
+    <px-demo-api-viewer source="px-file-upload" hide="{{hideLocalize}}"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -71,7 +71,7 @@
 
     properties: {
 
-      
+
       props: {
         type: Object,
         value: function(){ return this.demoProps; }
@@ -99,13 +99,20 @@
             }
           ]
         }
+      },
+
+      hideLocalize: {
+        type: Array,
+        value: function() {
+          return ['localize','resources','useKeyIfMissing','formats','pathToResources','loadResources','app-localize-resources-error','app-localize-resources-loaded']
+        }
       }
     },
 
     attached: function(){
-      var counter = 0;      
+      var counter = 0;
       this.addEventListener('px-file-upload-files-changed', function(evt) {
-          counter++; 
+          counter++;
         var span = this.$$('#counter');
         span.innerHTML = 'The <strong>px-file-upload-files-changed</strong> event has fired <strong>' + counter + '</strong> time(s)';
       });
