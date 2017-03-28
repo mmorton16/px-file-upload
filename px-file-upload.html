@@ -5,7 +5,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../px-localize-behavior/px-localize-behavior.html">
 <!--
 File upload component. Allows user to select one or more files from filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
 
@@ -72,12 +72,12 @@ Custom property | Description | Default
     * use app-localize-behavior to realize internationalization
     */
     behaviors: [
-        Polymer.AppLocalizeBehavior
+        PxLocalizeBehavior
     ],
     properties: {
     /**
       * A valid IETF language tag as a string that `app-localize-behavior` will
-      * use to localize this component. Refer to locales.json for currently supported languages.
+      * use to localize this component. Refer to px-localize-behavior for currently supported languages.
       *
       * See https://github.com/PolymerElements/app-localize-behavior for API
       * documentation and more information.
@@ -151,9 +151,6 @@ Custom property | Description | Default
           return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
         }
       }
-    },
-    attached: function() {
-      this.loadResources(this.resolveUrl('locales.json'));
     },
     /**
      * Ready function, enables the drag and drop area if the feature is supported.

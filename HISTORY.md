@@ -1,3 +1,7 @@
+v0.4.10
+==================
+* cutover to PxLocalizeBehavior
+
 v0.4.9
 ==================
 * hide app-localize props from API
