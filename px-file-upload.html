@@ -174,66 +174,7 @@ Custom property | Description | Default
           e.preventDefault();
           e.stopPropagation();
           this.toggleClass("hover",false,dropZone);
-          // Single file mode
-          if(!this.multiple) {
-            // Multiple files dropped, only one allowed
-            if(e.dataTransfer.files.length > 1){
-              this.$$('#validation').innerHTML = this.localize("Only one file is allowed.");
-              this.toggleClass('hidden',false,this.$$('#validation'));
-              this.toggleClass('hidden',true,this.$$('#fileList'));
-              this.$.fileInput.value = "";
-              this.files = [];
-              return;
-            }
-            if(this.accept !== "") {
-              // Invalid file type was dropped
-              if(!this._isValid(e.dataTransfer.files[0])) {
-                this.$$('#validation').innerHTML = this.localize("Invalid file type.");
-                this.toggleClass('hidden',false,this.$$('#validation'));
-                this.toggleClass('hidden',true,this.$$('#fileList'));
-                this.$.fileInput.value = "";
-                this.files = [];
-                return;
-              }
-              else {
-                this.$$('#validation').innerHTML = "";
-                this.toggleClass('hidden',true,this.$$('#validation'));
-                this.toggleClass('hidden',false,this.$$('#fileList'));
-                this.$.fileInput.files = e.dataTransfer.files;
-                return;
-              }
-            }
-            // Either accepted file types wasn't specified
-            // or valid file type was dropped
-            this.$$('#validation').innerHTML = "";
-            this.toggleClass('hidden',true,this.$$('#validation'));
-            this.toggleClass('hidden',false,this.$$('#fileList'));
-            this.$.fileInput.files = e.dataTransfer.files;
-            return;
-          }
-          // Multiple file mode
-          else {
-            if(this.accept !== "") {
-              // Check each file against accepted file types
-              for(i = 0; i < e.dataTransfer.files.length; i++) {
-                var file = e.dataTransfer.files[i];
-                if(!this._isValid(file)) {
-                  this.$$('#validation').innerHTML = this.localize("Invalid file type.");
-                  this.toggleClass('hidden',false,this.$$('#validation'));
-                  this.toggleClass('hidden',true,this.$$('#fileList'));
-                  this.$.fileInput.value = "";
-                  this.files = [];
-                  return;
-                }
-              }
-            }
-            // Either accepted file types not specified or all checks above passed
-            this.$$('#validation').innerHTML = "";
-            this.toggleClass('hidden',true,this.$$('#validation'));
-            this.toggleClass('hidden',false,this.$$('#fileList'));
-            this.$.fileInput.files = e.dataTransfer.files;
-            return;
-          }
+          this.$.fileInput.files = e.dataTransfer.files;
         }
       }
     },
@@ -260,6 +201,54 @@ Custom property | Description | Default
      */
     _fileChange: function(e) {
       this.files = this._toArray(e.target.files);
+
+      // Single file mode
+      if(!this.multiple) {
+        // Multiple files dropped, only one allowed
+        if(e.target.files.length > 1){
+          this.$$('#validation').innerHTML = this.localize("Only one file is allowed.");
+          this.toggleClass('hidden',false,this.$$('#validation'));
+          this.toggleClass('hidden',true,this.$$('#fileList'));
+          this.$.fileInput.value = "";
+          this.files = [];
+          this._notifyFilesChanged();
+          return;
+        }
+        if(this.accept !== "") {
+          // Invalid file type was dropped
+          if(!this._isValid(e.target.files[0])) {
+            this.$$('#validation').innerHTML = this.localize("Invalid file type.");
+            this.toggleClass('hidden',false,this.$$('#validation'));
+            this.toggleClass('hidden',true,this.$$('#fileList'));
+            this.$.fileInput.value = "";
+            this.files = [];
+            this._notifyFilesChanged();
+            return;
+          }
+        }
+      }
+      // Multiple file mode
+      else {
+        if(this.accept !== "") {
+          // Check each file against accepted file types
+          for(i = 0; i < e.target.files.length; i++) {
+            var file = e.target.files[i];
+            if(!this._isValid(file)) {
+              this.$$('#validation').innerHTML = this.localize("Invalid file type.");
+              this.toggleClass('hidden',false,this.$$('#validation'));
+              this.toggleClass('hidden',true,this.$$('#fileList'));
+              this.$.fileInput.value = "";
+              this.files = [];
+              this._notifyFilesChanged();
+              return;
+            }
+          }
+        }
+      }
+
+      // Either accepted file types not specified or all checks above passed
+      this.$$('#validation').innerHTML = "";
+      this.toggleClass('hidden',true,this.$$('#validation'));
 
       if (this.files.length === 0) {
         this.$$('#fileList').innerHTML = this.localize('No file selected');
@@ -327,7 +316,7 @@ Custom property | Description | Default
      */
     _isValid: function(file) {
       var accept = this.accept;
-      if(this.accept.indexOf(file.type) > -1) {
+      if(file.type && this.accept.indexOf(file.type) > -1) {
         return true;
       }
       else if(this.accept.indexOf(file.name.match(/\.[^\.]*$/)[0]) > -1) {

@@ -1,3 +1,7 @@
+v0.4.11
+==================
+* move file type validation to support MS Edge
+
 v0.4.10
 ==================
 * cutover to PxLocalizeBehavior
