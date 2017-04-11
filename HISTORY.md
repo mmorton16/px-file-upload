@@ -1,3 +1,7 @@
+v0.4.12
+==================
+* remove unnecessary closing tag (#11)
+
 v0.4.11
 ==================
 * move file type validation to support MS Edge
