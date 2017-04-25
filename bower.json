@@ -5,6 +5,7 @@
     "px-file-upload.html"
   ],
   "ignore": [
+    "*.enc",
     ".*",
     "npm-debug.log",
     "gulpfile.js",
