@@ -5,7 +5,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-<link rel="import" href="../px-localize-behavior/px-localize-behavior.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <!--
 File upload component. Allows user to select one or more files from filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
 
@@ -34,7 +34,7 @@ Custom property | Description | Default
   <template>
     <style include="px-file-upload-styles"></style>
     <div id="dropZone" class="fieldset u-p-">
-      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;[[message]]<br/><br/></span>
+      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">
           <tr>
@@ -71,20 +71,9 @@ Custom property | Description | Default
     * use app-localize-behavior to realize internationalization
     */
     behaviors: [
-        PxLocalizeBehavior
+        Polymer.AppLocalizeBehavior
     ],
     properties: {
-    /**
-      * A valid IETF language tag as a string that `app-localize-behavior` will
-      * use to localize this component. Refer to px-localize-behavior for currently supported languages.
-      *
-      * See https://github.com/PolymerElements/app-localize-behavior for API
-      * documentation and more information.
-      */
-      language: {
-        value: 'en',
-        type: String
-    },
     /**
      * The message that shows up above the upload button.
      * @type String
@@ -148,6 +137,45 @@ Custom property | Description | Default
         value: function() {
           var div = document.createElement('div');
           return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+        }
+      },
+      /**
+       * A valid IETF language tag as a string that `px-localize-behavior` will
+       * use to localize this component. Refer to px-localize-behavior for currently supported languages.
+       *
+       * See https://github.com/PolymerElements/app-localize-behavior for API
+       * documentation and more information.
+       */
+      language: {
+        type: String,
+        value: 'en'
+      },
+      /**
+      * Use the key for localization if value for  language is missing. Should
+      * always be true for  our components
+      */
+      useKeyIfMissing: {
+        type: Boolean,
+        value: true
+      },
+      /**
+       * List of strings needing to be localized for this compoennt
+       */
+      resources: {
+        type: Object,
+        value: function() {
+          return {
+            'en': {
+             'Drag and drop files here, or click the button below.': 'Drag and drop files here, or click the button below.',
+             'Only one file is allowed.': 'Only one file is allowed.',
+             'Invalid file type.': 'Invalid file type.',
+             'No file selected': 'No file selected',
+             'Choose File': 'Choose File',
+             'Name': 'Name',
+             'Size': 'Size',
+             'Type': 'Type'
+            }
+          }
         }
       }
     },

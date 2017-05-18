@@ -43,8 +43,7 @@
               multiple="{{props.multiple.value}}"
               disabled="{{props.disabled.value}}"
               accept="{{props.accept.value}}"
-              message="{{props.message.value}}"
-              language="{{props.language.value}}">
+              message="{{props.message.value}}">
           </px-file-upload>
         </div>
 
@@ -145,13 +144,6 @@
         type: String,
         defaultValue: 'Drag and drop files here, or click the button below.',
         inputType: 'text'
-      },
-
-      language: {
-        type: String,
-        defaultValue: 'en',
-        inputType: 'dropdown',
-        inputChoices: ['de','en','es','fr','zh-cn']
       }
     }
 
