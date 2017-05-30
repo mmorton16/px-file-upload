@@ -34,14 +34,6 @@ function runCustomTests() {
       assert.equal(message, "test message");
       done();
     });
-    test('Check multiple language is zh-cn"', function(done){
-      var button = uploadEl3.$$('#fileButton');
-      setTimeout(function() {
-        button = button.textContent.trim();
-        assert.equal(button,"选择文件");
-        done();
-      }, 500);
-    });
 
   });
 }
