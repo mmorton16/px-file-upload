@@ -4,7 +4,7 @@
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <!--
 File upload component. Allows user to select one or more files from filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
@@ -34,7 +34,7 @@ Custom property | Description | Default
   <template>
     <style include="px-file-upload-styles"></style>
     <div id="dropZone" class="fieldset u-p-">
-      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="fa:fa-cloud-upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
+      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="px:upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">
           <tr>
@@ -48,7 +48,7 @@ Custom property | Description | Default
               <td>{{item.name}}</td>
               <td>{{_readableFileSize(item.size)}}</td>
               <td>{{item.type}}</td>
-              <td><iron-icon id="icon{{index}}" icon="fa:fa-minus-circle" on-click="_removeFile"></iron-icon></td>
+              <td><iron-icon id="icon{{index}}" icon="px:delete" on-click="_removeFile"></iron-icon></td>
             </tr>
           </template>
         </table>
