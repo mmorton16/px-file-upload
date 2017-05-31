@@ -1,5 +1,6 @@
 v1.0.0
 ==================
+* component redesign
 * update dependencies, colors, and icons for design refresh
 * use app-localize-behavior for localization
 

@@ -21,10 +21,15 @@
     <style include="px-demo-styles" is="custom-style"></style>
 
     <!-- Header -->
-    <px-demo-header
+    <!-- <px-demo-header
         module-name="px-file-upload"
         description=" The px-file-upload component allows user to select one or more files from their filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.">
+    </px-demo-header> -->
+
+    <px-demo-header
+        module-name="px-file-upload">
     </px-demo-header>
+
 
     <!-- Interactive -->
     <px-demo-interactive>
@@ -36,7 +41,7 @@
 
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
-        <span id="counter">The <strong>px-file-upload-files-changed</strong> event has fired <strong>0</strong> time(s)</span>
+        <!-- <span id="counter">The <strong>px-file-upload-files-changed</strong> event has fired <strong>0</strong> time(s)</span> -->
 
         <div style="max-width:400px;max-height:400px;">
           <px-file-upload
@@ -110,12 +115,12 @@
     },
 
     attached: function(){
-      var counter = 0;
-      this.addEventListener('px-file-upload-files-changed', function(evt) {
-          counter++;
-        var span = this.$$('#counter');
-        span.innerHTML = 'The <strong>px-file-upload-files-changed</strong> event has fired <strong>' + counter + '</strong> time(s)';
-      });
+      // var counter = 0;
+      // this.addEventListener('px-file-upload-files-changed', function(evt) {
+      //     counter++;
+      //   var span = this.$$('#counter');
+      //   span.innerHTML = 'The <strong>px-file-upload-files-changed</strong> event has fired <strong>' + counter + '</strong> time(s)';
+      // });
     },
 
     /**

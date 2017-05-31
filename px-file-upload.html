@@ -1,4 +1,4 @@
-<!--
+canDragAndDrop<!--
     Relative paths assume component is being run from inside an app or another component, where dependencies are flat
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
@@ -34,7 +34,7 @@ Custom property | Description | Default
   <template>
     <style include="px-file-upload-styles"></style>
     <div id="dropZone" class="fieldset u-p-">
-      <span id="dndInstructions" hidden$="{{!_isAdvancedUpload}}"><iron-icon icon="px:upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
+      <span class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}}"><iron-icon icon="px:upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden" id="fileTable">
           <tr>
@@ -48,13 +48,13 @@ Custom property | Description | Default
               <td>{{item.name}}</td>
               <td>{{_readableFileSize(item.size)}}</td>
               <td>{{item.type}}</td>
-              <td><iron-icon id="icon{{index}}" icon="px:delete" on-click="_removeFile"></iron-icon></td>
+              <td><iron-icon id="icon{{index}}" icon="px:close" on-click="_removeFile"></iron-icon></td>
             </tr>
           </template>
         </table>
       </template>
-      <label id="fileButton" class="btn u-mr--">{{localize('Choose File')}}
-        <input id="fileInput" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
+      <label id="fileButton" class$="{{_disableUploadButton(disabled)}} btn u-mr--">{{localize('Choose File')}}
+        <input id="fileInput" disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
       <span id="fileList">{{localize('No file selected')}}</span>
       <span id="validation" class="hidden"></span>
@@ -326,14 +326,41 @@ Custom property | Description | Default
      * @method _disable
      */
    _disable: function() {
-        this.toggleClass('btn--disabled',this.disabled,this.$$('#fileButton'));
-        this.toggleAttribute('disabled',this.disabled,this.$$('#fileInput'));
-        this.toggleClass('hidden',this.disabled,this.$$('#dndInstructions'))
+        // this.toggleClass('btn--disabled',this.disabled,this.$$('#fileButton'));
+        // this.toggleAttribute('disabled',this.disabled,this.$$('#fileInput'));
+        // this.toggleClass('hidden',this.disabled,this.$$('#dndInstructions'))
         if(this.multiple){
           for(i = 0; i < this.files.length; i++) {
               this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
           }
         }
+    },
+    /**
+     * Disable the upload button if disabled property is set to true
+     *
+     * @method _disableUploadButton
+     */
+    _disableUploadButton: function(disabled) {
+      if (!disabled) return '';
+      return 'btn--disabled';
+    },
+    /**
+     * Disable file upload input if disabled property is set to true
+     *
+     * @method _disableUploadButton
+     */
+    _disableFileUpload: function(disabled) {
+      if (!disabled) return '';
+      return 'disabled';
+    },
+    /**
+     * Hides the drag and drop zone if upload is disabled or drag and drop is not supported by the browser
+     *
+     * @method _showHideDragAndDrop
+     */
+    _showHideDragAndDrop: function(_isAdvancedUpload, disabled) {
+      if (_isAdvancedUpload && !disabled) return '';
+      return 'hidden';
     },
     /**
      * Compares a file's type and extension to the accept property to validate.
