@@ -1,4 +1,4 @@
-canDragAndDrop<!--
+<!--
     Relative paths assume component is being run from inside an app or another component, where dependencies are flat
     siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
@@ -7,9 +7,9 @@ canDragAndDrop<!--
 <link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <!--
-File upload component. Allows user to select one or more files from filesystem by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
+File upload component. Allows user to select one or more files from the file system by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
 
-##### Usage
+### Usage
 
     <px-file-upload multiple disabled accept=".txt,text/html"></px-file-upload>
 
@@ -18,9 +18,9 @@ The following custom properties are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--px-file-upload-validation-color` | Text color for invalid file error messages | `$alert-red`
-`--px-file-upload-dropzone-background-color` | Background color for the dropzone | `rgba(0,0,0,.15)`
-`--px-file-upload-dropzone-border-color` | Border color for the dropzone | `$gray8`
+`--px-file-upload-file-list-color` | Text color for the same of the selected file or 'No file selected' message | `$gray10`
+`--px-file-upload-validation-color` | Text color for invalid file error message | `$status-red3`
+`--px-file-upload-dropzone-background-color` | Background color for the dropzone | `$primary-light`
 
 @element px-file-upload
 @blurb Drag-and-drop file upload component.
@@ -33,10 +33,10 @@ Custom property | Description | Default
 <dom-module id="px-file-upload">
   <template>
     <style include="px-file-upload-styles"></style>
-    <div id="dropZone" class="fieldset u-p-">
-      <span class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}}"><iron-icon icon="px:upload"></iron-icon>&nbsp;[[localize(message)]]<br/><br/></span>
+    <div id="dropZone" class="dropZone fieldset u-p-">
+      <div class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><iron-icon class="icon u-mr--" icon="px:upload"></iron-icon>[[localize(message)]]</div>
       <template is="dom-if" if="{{multiple}}">
-        <table class="table table--small table--rows hidden" id="fileTable">
+        <table class="table table--small table--rows hidden fileTable" id="fileTable">
           <tr>
             <th>{{localize('Name')}}</th>
             <th>{{localize('Size')}}</th>
@@ -48,7 +48,7 @@ Custom property | Description | Default
               <td>{{item.name}}</td>
               <td>{{_readableFileSize(item.size)}}</td>
               <td>{{item.type}}</td>
-              <td><iron-icon id="icon{{index}}" icon="px:close" on-click="_removeFile"></iron-icon></td>
+              <td><iron-icon id="icon{{index}}" icon="px:close" class="icon actionable actionable--secondary" on-click="_removeFile"></iron-icon></td>
             </tr>
           </template>
         </table>
@@ -56,9 +56,8 @@ Custom property | Description | Default
       <label id="fileButton" class$="{{_disableUploadButton(disabled)}} btn u-mr--">{{localize('Choose File')}}
         <input id="fileInput" disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
-      <span id="fileList">{{localize('No file selected')}}</span>
-      <span id="validation" class="hidden"></span>
-
+      <span id="fileList" class="fileList">{{localize('No file selected')}}</span>
+      <span id="validation" class="validation hidden"></span>
     </div>
   </template>
 </dom-module>
@@ -347,7 +346,7 @@ Custom property | Description | Default
     /**
      * Disable file upload input if disabled property is set to true
      *
-     * @method _disableUploadButton
+     * @method _disableFileUpload
      */
     _disableFileUpload: function(disabled) {
       if (!disabled) return '';

@@ -22,37 +22,26 @@ Predix branding rules go in px-file-upload-predix.scss, not in this file.
 
 
 // Generic
-@import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 @import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-@import "px-flexbox-design/_base.flexbox.scss";
-@import "px-viewport-design/_base.viewport.scss";
-
-$inuit-enable-input--tiny: true;
-$inuit-enable-input--small: true;
-$inuit-enable-input--regular: true;
-$inuit-enable-input--large: true;
-$inuit-enable-inline-fields: true;
-$inuit-enable-validation-states: true;
-@import "px-forms-design/_base.forms.scss";
-
 $inuit-enable-table--rows: true;
 $inuit-enable-table--small: true;
 @import "px-tables-design/_base.tables.scss";
 
 $inuit-enable-btn--disabled: true;
 $inuit-enable-btn--secondary: true;
-@import "px-meta-buttons-design/_meta.buttons.scss";
+@import "px-buttons-design/_objects.buttons.scss";
 
+// Objects
+@import "px-actionable-text-icons-design/_objects.actionable.scss";
 
-// Component
+// Components
 
 // Trumps
 
-$inuit-enable-paddings--tiny : true;
+$inuit-enable-paddings--small : true;
+$inuit-enable-paddings--large : true;
 $inuit-enable-margins--tiny : true;
 @import "px-spacing-design/_trumps.spacing.scss";
-@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
-@import "px-widths-responsive-design/_trumps.widths-responsive.scss";

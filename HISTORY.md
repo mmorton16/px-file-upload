@@ -1,5 +1,6 @@
 v1.0.0
 ==================
+* update default colors to separate out px theming
 * component redesign
 * update dependencies, colors, and icons for design refresh
 * use app-localize-behavior for localization
