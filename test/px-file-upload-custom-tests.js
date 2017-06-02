@@ -29,8 +29,8 @@ function runCustomTests() {
       done();
     });
     test('Check that message is "test message"', function(done){
-      var span = uploadEl2.$.dndInstructions,
-          message = span.textContent.trim(); //the trim removes \n lines
+      var div = uploadEl2.$.dndInstructions,
+          message = div.textContent.trim(); //the trim removes \n lines
       assert.equal(message, "test message");
       done();
     });

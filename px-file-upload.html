@@ -34,7 +34,7 @@ Custom property | Description | Default
   <template>
     <style include="px-file-upload-styles"></style>
     <div id="dropZone" class="dropZone fieldset u-p-">
-      <div class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><iron-icon class="icon u-mr--" icon="px:upload"></iron-icon>[[localize(message)]]</div>
+      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><iron-icon class="icon u-mr--" icon="px:upload"></iron-icon>[[localize(message)]]</div>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden fileTable" id="fileTable">
           <tr>
@@ -325,14 +325,11 @@ Custom property | Description | Default
      * @method _disable
      */
    _disable: function() {
-        // this.toggleClass('btn--disabled',this.disabled,this.$$('#fileButton'));
-        // this.toggleAttribute('disabled',this.disabled,this.$$('#fileInput'));
-        // this.toggleClass('hidden',this.disabled,this.$$('#dndInstructions'))
-        if(this.multiple){
-          for(i = 0; i < this.files.length; i++) {
-              this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
-          }
-        }
+     if(this.multiple){
+       for(i = 0; i < this.files.length; i++) {
+         this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
+       }
+     }
     },
     /**
      * Disable the upload button if disabled property is set to true
