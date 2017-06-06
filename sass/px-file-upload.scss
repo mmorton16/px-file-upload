@@ -30,12 +30,13 @@ $inuit-enable-btn--secondary: true;
   width: 16px;
   height: 16px;
 }
-
 .fileTable {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
+.fileTable td {
+  height: 40px;
+}
 .fileTable, .fileTable th, .fileTable td {
   text-align: left;
   padding-left: 30px;
