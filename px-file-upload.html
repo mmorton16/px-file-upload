@@ -263,6 +263,7 @@ Custom property | Description
               this.$$('#validation').innerHTML = this.localize("Invalid file type.");
               this.toggleClass('hidden',false,this.$$('#validation'));
               this.toggleClass('hidden',true,this.$$('#fileList'));
+              this.toggleClass('hidden',true,this.$$('#fileTable'));
               this.$.fileInput.value = "";
               this.files = [];
               this._notifyFilesChanged();
