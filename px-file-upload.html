@@ -35,7 +35,7 @@ Custom property | Description
   <template>
     <style include="px-file-upload-styles"></style>
     <div id="dropZone" class="dropZone fieldset u-p-">
-      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><px-icon class="icon u-mr--" icon="px:upload"></px-icon>[[localize(message)]]</div>
+      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><px-icon class="icon u-mr--" icon="pxs:upload"></px-icon>[[localize(message)]]</div>
       <template is="dom-if" if="{{multiple}}">
         <table class="table table--small table--rows hidden fileTable" id="fileTable">
           <tr>
@@ -49,7 +49,7 @@ Custom property | Description
               <td>{{item.name}}</td>
               <td>{{_readableFileSize(item.size)}}</td>
               <td>{{item.type}}</td>
-              <td><px-icon id="icon{{index}}" icon="px:close" class="icon actionable actionable--secondary" on-click="_removeFile"></px-icon></td>
+              <td><px-icon id="icon{{index}}" icon="pxm:close" class="icon actionable actionable--secondary" on-click="_removeFile"></px-icon></td>
             </tr>
           </template>
         </table>
