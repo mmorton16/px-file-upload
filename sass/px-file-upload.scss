@@ -18,6 +18,7 @@
 $inuit-enable-table--rows: true;
 $inuit-enable-table--small: true;
 @import "px-tables-design/_base.tables.scss";
+@import "px-headings-design/_base.headings.scss";
 
 $inuit-enable-btn--disabled: true;
 $inuit-enable-btn--secondary: true;
@@ -35,19 +36,42 @@ $inuit-enable-btn--secondary: true;
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.fileTable td {
+.fileTable .td {
   height: 40px;
 }
-.fileTable, .fileTable th, .fileTable td {
+.fileTable, .fileTable .th, .fileTable .td {
   text-align: left;
   padding-left: 30px;
 }
-.fileTable tr > td:first-child, .fileTable tr > th:first-child{
+.fileTable .tr > .td:first-child, .fileTable .tr > .th:first-child{
   padding-left: 15px;
 }
-.fileTable tr > td:last-child{
+.fileTable .tr > .td:last-child{
   padding-right: 15px;
 }
+
+.table {
+  display: table;
+}
+.td {
+  display: table-cell;
+  border-bottom: 1px solid var(--px-table-separator-color, lightgray);
+  vertical-align: middle;
+}
+.tr {
+  display: table-row;
+}
+.tr:last-of-type .td  {
+  border-bottom: 1px solid var(--px-table-border-color, black);
+}
+.th {
+  display: table-cell;
+  border-bottom: 1px solid var(--px-table-border-color, black);
+  vertical-align: middle;
+  padding-bottom: 5px;
+}
+
+
 .fileList {
   color: var(--px-file-upload-file-list-color, gray);
 }
