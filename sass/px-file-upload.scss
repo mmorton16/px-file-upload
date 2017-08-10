@@ -15,9 +15,6 @@
 @import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-$inuit-enable-table--rows: true;
-$inuit-enable-table--small: true;
-@import "px-tables-design/_base.tables.scss";
 @import "px-headings-design/_base.headings.scss";
 
 $inuit-enable-btn--disabled: true;
@@ -28,65 +25,61 @@ $inuit-enable-btn--secondary: true;
 @import "px-actionable-design/_objects.actionable.scss";
 
 // Components
-.icon {
-  width: 16px;
-  height: 16px;
-}
-.fileTable {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.fileTable .td {
-  height: 40px;
-}
-.fileTable, .fileTable .th, .fileTable .td {
-  text-align: left;
-  padding-left: 30px;
-}
-.fileTable .tr > .td:first-child, .fileTable .tr > .th:first-child{
-  padding-left: 15px;
-}
-.fileTable .tr > .td:last-child{
-  padding-right: 15px;
-}
-
-.table {
+.file-upload-fileTable {
   display: table;
+  margin-top: $inuit-base-spacing-unit--small;
+  margin-bottom: $inuit-base-spacing-unit--large;
 }
-.td {
-  display: table-cell;
-  border-bottom: 1px solid var(--px-table-separator-color, lightgray);
-  vertical-align: middle;
-}
-.tr {
+.file-upload-tr {
   display: table-row;
 }
-.tr:last-of-type .td  {
+.file-upload-tr > .file-upload-td:first-child, .file-upload-tr > .file-upload-th:first-child{
+  padding-left: $inuit-base-spacing-unit;
+}
+.file-upload-tr > .file-upload-td:last-child{
+  padding-right: $inuit-base-spacing-unit;
+}
+.file-upload-tr:last-of-type .file-upload-td  {
   border-bottom: 1px solid var(--px-table-border-color, black);
 }
-.th {
+.file-upload-th, .file-upload-td {
   display: table-cell;
-  border-bottom: 1px solid var(--px-table-border-color, black);
+  text-align: left;
   vertical-align: middle;
-  padding-bottom: 5px;
+  padding: $inuit-base-spacing-unit--tiny;
+  padding-left: $inuit-base-spacing-unit--huge;
 }
-
-
-.fileList {
+.file-upload-th {
+  border-bottom: 1px solid var(--px-table-border-color, black);
+}
+.file-upload-td {
+  height: calculateRem(40px);
+  border-bottom: 1px solid var(--px-table-separator-color, lightgray);
+}
+.file-upload-icon {
+  width: calculateRem(16px);
+  height: calculateRem(16px);
+}
+.file-upload-fileList {
   color: var(--px-file-upload-file-list-color, gray);
 }
-.dropZone {
-  padding: 5px;
+.file-upload-dropZone {
+  padding: $inuit-base-spacing-unit--tiny;
 }
-.dropZone.hover {
+.file-upload-dropZone.hover {
   background-color: var(--px-file-upload-dropzone-background-color, lightgray);
 }
-.validation {
+.file-upload-validation {
   color: var(--px-file-upload-validation-color, red);
 }
 
 // Trumps
+$inuit-enable-paddings--tiny : true;
 $inuit-enable-paddings--small : true;
+$inuit-enable-paddings : true;
 $inuit-enable-paddings--large : true;
+$inuit-enable-paddings--huge : true;
 $inuit-enable-margins--tiny : true;
+$inuit-enable-margins--small : true;
+$inuit-enable-margins--large : true;
 @import "px-spacing-design/_trumps.spacing.scss";

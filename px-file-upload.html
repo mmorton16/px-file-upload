@@ -34,22 +34,22 @@ Custom property | Description
 <dom-module id="px-file-upload">
   <template>
     <style include="px-file-upload-styles"></style>
-    <div id="dropZone" class="dropZone fieldset u-p-">
-      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><px-icon class="icon u-mr--" icon="px-utl:upload"></px-icon>[[localize(message)]]</div>
+    <div id="file-upload-dropZone" class="file-upload-dropZone fieldset u-p-">
+      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><px-icon class="file-upload-icon u-mr--" icon="px-utl:upload"></px-icon>[[localize(message)]]</div>
       <template is="dom-if" if="{{multiple}}">
-        <div class="table hidden fileTable" id="fileTable">
-          <div class="tr caps muted zeta">
-            <div class="th">{{localize('Name')}}</div>
-            <div class="th">{{localize('Size')}}</div>
-            <div class="th">{{localize('Type')}}</div>
-            <div class="th"></div>
+        <div class="hidden file-upload-fileTable" id="fileTable">
+          <div class="file-upload-tr label">
+            <div class="file-upload-th">{{localize('Name')}}</div>
+            <div class="file-upload-th">{{localize('Size')}}</div>
+            <div class="file-upload-th">{{localize('Type')}}</div>
+            <div class="file-upload-th"></div>
           </div>
           <template is="dom-repeat" items="{{files}}">
-            <div class="tr">
-              <div class="td">{{item.name}}</div>
-              <div class="td">{{_readableFileSize(item.size)}}</div>
-              <div class="td">{{item.type}}</div>
-              <div class="td"><px-icon id="icon{{index}}" icon="px-nav:close" class="icon actionable actionable--secondary" on-click="_removeFile"></px-icon></div>
+            <div class="file-upload-tr">
+              <div class="file-upload-td">{{item.name}}</div>
+              <div class="file-upload-td">{{_readableFileSize(item.size)}}</div>
+              <div class="file-upload-td">{{item.type}}</div>
+              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-click="_removeFile"></px-icon></div>
             </div>
           </template>
         </div>
@@ -57,8 +57,8 @@ Custom property | Description
       <label id="fileButton" class$="{{_disableUploadButton(disabled)}} btn u-mr--">{{localize('Choose File')}}
         <input id="fileInput" disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
-      <span id="fileList" class="fileList">{{localize('No file selected')}}</span>
-      <span id="validation" class="validation hidden"></span>
+      <span id="fileList" class="file-upload-fileList">{{localize('No file selected')}}</span>
+      <span id="validation" class="file-upload-validation hidden"></span>
     </div>
   </template>
 </dom-module>
@@ -179,6 +179,7 @@ Custom property | Description
         }
       }
     },
+
     /**
      * Ready function, enables the drag and drop area if the feature is supported.
      *
