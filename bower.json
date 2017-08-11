@@ -35,12 +35,10 @@
     "px-normalize-design": "^1.0.0",
     "px-box-sizing-design": "^1.0.0",
     "px-helpers-design": "^1.0.0",
-    "px-spacing-design": "^1.0.0",
+    "px-headings-design": "^1.0.0",
     "px-buttons-design": "^2.0.0",
-    "px-tables-design": "^2.0.0",
-    "px-code-design": "^2.0.0",
-    "px-toggle-design": "^2.0.0",
-    "px-actionable-design": "^2.0.0"
+    "px-actionable-design": "^2.0.0",
+    "px-spacing-design": "^1.0.0"
   },
   "resolutions": {
     "webcomponentsjs": "^0.7.24"
