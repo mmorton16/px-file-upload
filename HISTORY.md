@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* Fix fileTable to work in IE
+
 v1.0.2
 ==================
 * Fix comment for analyzer
