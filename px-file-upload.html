@@ -211,9 +211,12 @@ Custom property | Description
      * @param object
      */
     _toArray: function(obj) {
-      return  Object.keys(obj).map(function(key) {
-        return obj[key]
-      });
+      return  Object.keys(obj).reduce(function(accum, key) {
+        if (!isNaN(key)) {
+          accum.push(obj[key]);
+        }
+        return accum;
+      }, []);
     },
 
     /**
