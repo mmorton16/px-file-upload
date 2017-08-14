@@ -1,6 +1,10 @@
+v1.0.4
+==================
+* Fix fileTable bug in Safari 9 (fixes #17)
+
 v1.0.3
 ==================
-* Fix fileTable to work in IE
+* Fix fileTable to work in IE (#15)
 
 v1.0.2
 ==================
