@@ -1,3 +1,7 @@
+v1.0.5
+==================
+* merge PR #19
+
 v1.0.4
 ==================
 * Fix fileTable bug in Safari 9 (fixes #17)
