@@ -50,7 +50,7 @@ Custom property | Description
         </div>
       </template>
       <label id="fileButton" class$="{{_disableUploadButton(disabled)}} btn u-mr--">{{localize('Choose File')}}
-        <input id="fileInput" disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
+        <input id="fileInput" name={{name}} disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
       <span id="fileList" class="file-upload-fileList">{{localize('No file selected')}}</span>
       <span id="validation" class="file-upload-validation hidden"></span>
@@ -85,6 +85,16 @@ Custom property | Description
        * @default ""
        */
       accept: {
+        type: String,
+        value: ""
+      },
+      /**
+       * The form element name.
+       * @property name
+       * @type String
+       * @default ""
+       */
+      name: {
         type: String,
         value: ""
       },
