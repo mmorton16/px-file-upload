@@ -1,3 +1,7 @@
+v1.1.0
+==================
+* add clear method
+
 v1.0.6
 ==================
 * add device flags

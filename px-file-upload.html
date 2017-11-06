@@ -315,6 +315,7 @@ Custom property | Description
      * and hides the header row of the table if the last file is removed.
      * Also clears the hidden input to prevent a mismatch situation and to make
      * sure that onChange gets called if the user chooses the same file again.
+     * Also fires the px-file-upload-files-changed event.
      *
      * @method _removeFile
      * @param event
@@ -327,7 +328,26 @@ Custom property | Description
           this.toggleClass('hidden',false,this.$$('#fileList'));
         }
         this.$.fileInput.value = "";
+        this._notifyFilesChanged();
       }
+    },
+
+    /**
+     * Removes any selected files and restores the file upload component to its default empty state.
+     * Also fires the px-file-upload-files-changed event.
+     *
+     * @method clear
+     */
+
+    clear: function() {
+      this.set('files', []);
+      this.$.fileInput.value = "";
+      this.$$('#fileList').innerHTML = this.localize('No file selected');
+      if(this.multiple) {
+        this.toggleClass('hidden',true,this.$$('#fileTable'));
+        this.toggleClass('hidden',false,this.$$('#fileList'));
+      }
+      this._notifyFilesChanged();
     },
 
     /**
