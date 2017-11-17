@@ -17,7 +17,9 @@
 <!-- Demo DOM module -->
 <dom-module id="px-file-upload-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Header -->
     <px-demo-header
@@ -29,27 +31,28 @@
     <!-- Interactive -->
     <px-demo-interactive>
       <!-- Configs -->
-      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{chosenConfig}}"></px-demo-configs>
 
       <!-- Props -->
-      <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component>
+      <px-demo-component slot="px-demo-component">
         <div id="counter" class="u-mb+">The <strong>px-file-upload-files-changed</strong> event has fired <strong>0</strong> time(s)</div>
         <px-file-upload
-            multiple="{{props.multiple.value}}"
-            disabled="{{props.disabled.value}}"
-            accept="{{props.accept.value}}"
-            message="{{props.message.value}}">
+          multiple="{{props.multiple.value}}"
+          disabled="{{props.disabled.value}}"
+          accept="{{props.accept.value}}"
+          message="{{props.message.value}}">
         </px-file-upload>
 
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
       <px-demo-component-snippet
-          element-properties="{{props}}"
-          element-name="px-file-upload">
+        slot="px-demo-component-snippet"
+        element-properties="{{props}}"
+        element-name="px-file-upload">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
