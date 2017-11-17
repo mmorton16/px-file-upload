@@ -356,7 +356,7 @@ Custom property | Description
      * @method _disable
      */
    _disable: function() {
-     if(this.multiple){
+     if(this.disabled !== undefined && this.multiple){
        for(i = 0; i < this.files.length; i++) {
          this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
        }

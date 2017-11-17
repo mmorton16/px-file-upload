@@ -34,6 +34,6 @@
     }
   },
   "suites": [
-    "test/px-file-upload-test-fixture.html"
+    "test/index.html"
   ]
 }
