@@ -44,7 +44,7 @@ Custom property | Description
               <div class="file-upload-td">{{item.name}}</div>
               <div class="file-upload-td">{{_readableFileSize(item.size)}}</div>
               <div class="file-upload-td">{{item.type}}</div>
-              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-click="_removeFile"></px-icon></div>
+              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-tap="_removeFile"></px-icon></div>
             </div>
           </template>
         </div>
@@ -53,6 +53,7 @@ Custom property | Description
         <input id="fileInput" name={{name}} disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
       </label>
       <span id="fileList" class="file-upload-fileList">{{localize('No file selected')}}</span>
+      <px-icon id="fileClear" icon="px-nav:close" class="hidden file-upload-icon actionable actionable--secondary" on-tap="clear"></px-icon>
       <span id="validation" class="file-upload-validation hidden"></span>
     </div>
   </template>
@@ -299,10 +300,12 @@ Custom property | Description
           var filesize = this._readableFileSize(this.files[0].size);
           this.$$('#fileList').innerHTML = this.files[0].name + ' (' + filesize + ')';
           this.toggleClass('hidden',false,this.$$('#fileList'));
+          this.toggleClass('hidden',false,this.$$('#fileClear'));
         }
         else {
           this.toggleClass('hidden',false,this.$$('#fileTable'));
           this.toggleClass('hidden',true,this.$$('#fileList'));
+          this.toggleClass('hidden',true,this.$$('#fileClear'));
         }
       }
 
@@ -343,6 +346,7 @@ Custom property | Description
       this.set('files', []);
       this.$.fileInput.value = "";
       this.$$('#fileList').innerHTML = this.localize('No file selected');
+      this.toggleClass('hidden',true,this.$$('#fileClear'));
       if(this.multiple) {
         this.toggleClass('hidden',true,this.$$('#fileTable'));
         this.toggleClass('hidden',false,this.$$('#fileList'));
