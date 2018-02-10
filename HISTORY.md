@@ -1,3 +1,7 @@
+v1.2.2
+==================
+* fixing demo pages for IE11
+
 v1.2.1
 ==================
 * added ability to clear single file
