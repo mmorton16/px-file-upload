@@ -1,3 +1,7 @@
+v1.2.3
+==================
+* reduce icon-set imports, fix travis
+
 v1.2.2
 ==================
 * fixing demo pages for IE11
