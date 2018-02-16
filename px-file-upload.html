@@ -45,7 +45,10 @@ Custom property | Description
               <div class="file-upload-td">{{item.name}}</div>
               <div class="file-upload-td">{{_readableFileSize(item.size)}}</div>
               <div class="file-upload-td">{{item.type}}</div>
-              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-tap="_removeFile"></px-icon></div>
+              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-tap="
+                
+                
+                "></px-icon></div>
             </div>
           </template>
         </div>
@@ -326,7 +329,7 @@ Custom property | Description
      */
     _removeFile: function(e) {
       if(!this.disabled) {
-        this.splice("files",e.target.id.substring(4),1);
+        this.splice("files",e.model.__data__.index,1);
         if(this.multiple && this.files.length === 0){
           this.toggleClass('hidden',true,this.$$('#fileTable'));
           this.toggleClass('hidden',false,this.$$('#fileList'));
