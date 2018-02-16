@@ -326,7 +326,7 @@ Custom property | Description
      */
     _removeFile: function(e) {
       if(!this.disabled) {
-        this.splice("files",e.target.id.substring(4),1);
+        this.splice("files",e.model.__data__.index,1);
         if(this.multiple && this.files.length === 0){
           this.toggleClass('hidden',true,this.$$('#fileTable'));
           this.toggleClass('hidden',false,this.$$('#fileList'));
